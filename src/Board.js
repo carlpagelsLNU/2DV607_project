@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Square from './Square';
 import Test from './Test';
+import { moveImage } from './Game';
 
 export default class Board extends Component {
   renderSquare(i) {
@@ -16,13 +17,17 @@ export default class Board extends Component {
     return (
       <div key={i}
            style={{ width: '25%', height: '25%' }}
-            onClick="handleSquareClick(this)">
+            onClick={() => this.handleSquareClick(x, y)}>
         <Square black={black}>
           {piece}
         </Square>
       </div>
     );
-  }
+}
+
+handleSquareClick(toX, toY) {
+  moveImage(toX, toY);
+}
 
   render() {
     const squares = [];
@@ -40,11 +45,7 @@ export default class Board extends Component {
         {squares}
       </div>
     );
-  }
-}
-
-function handleSquareClick(square) {
-  square.style.background="#000000";
+  } 
 }
 
 Board.propTypes = {
